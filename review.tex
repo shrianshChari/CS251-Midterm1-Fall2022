@@ -55,7 +55,7 @@
 \begin{itemize}
     \item Represents the efficiency of an algorithm
     	\begin{itemize}
-    		\item Usually represents the cost of an algorithm for a specific value of n. (Equation is simply 
+    		\item Usually represents the cost of an algorithm for a specific value of n. 
     		\item However, can be amortized if the cost is distributed over an interval of values of n. (Equation is $\sum_{k=a}^{b} T(k) / (b-a+1)$)
     	\end{itemize}
     \item Three types of asymptotic runtime analysis: $O(n)$, $\Omega(n)$, and $\Theta(n)$
@@ -191,12 +191,12 @@
     \item There are a number of ways of taking an algorithm and determining the cost.
     	\begin{itemize}
     		\item
-    			Given a loop where the there in a variable is incremented by 1 between each iteration, a simple sigma notation can be used.
+    			Given a loop where a variable is incremented by 1 between each iteration, a simple sigma notation can be used.
     			
     			for$(i = 0; i < n; i++) f(i) \Rightarrow$
     			$\sum_{i=0}^{n-1} T_f(i)$
     		\item
-    			Given a loop where the there in a variable is multiplied by c between each iteration, you can use log, and then replace any value of $i$ with $2^k$.
+    			Given a loop where a variable is multiplied by c between each iteration, you can use log, and then replace any value of $i$ with $2^k$.
     			
     			for$(i = 1; i < n; i *= c) f(i) \Rightarrow$
     			$\sum_{k=0}^{\lceil \log_c n \rceil - 1} T_f(2^k)$
