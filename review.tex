@@ -38,10 +38,52 @@
 \begin{itemize}
     \item Limitations
         \begin{itemize}
-            \item Different machines can vary the run time % Make these more concrete phrases instead of from the slides
+        	% Make these more concrete phrases instead of from the slides
+            \item Different machines can vary the run time 
             \item other processes/noise
             \item May not be precise all the time 
         \end{itemize}
+    \item These limitations are all put together to form constants $c$, which are seen in just about any runtime cost. In the power law, they are lumped together into a proportionality constant $a$.
+    \item The power law is the law that $T(n)$ approximately follows the equation $T(n) = a * n^b$. The coefficient $a$ will be based on the hardware, which you cannot control. However, the value of $b$ is dependent on the algorithm.
+	\item Given a table that contains data for $n$ and the associated $T(n)$'s, we can check if the data  follows the power law.
+	\item Firstly, you can check if the values follow the power law by identifying the ratios between the rows of $T(n)$ and $n$. If the ratio between the rows of $n$ are consistent, then the ratios between the rows of $T(n)$ should also be consistent (though it can be a different ratio between $n$ and $T(n)$ and be okay. They just have to be consistent with their own rows).
+		\begin{itemize}
+			\item If the ratios between rows of $n$ are not consistent, that doesn't mean it doesn't follow the power law, only that its harder to check. Check the value of $\log_{r_n} (r_{T(n)})$ where $r_n$ is the ratio between two rows of $n$ and $r_{T(n)}$ is the ratio between rows of $T(n)$ (the same rows). For any two rows, this value should be essentially the same for it to follow the power law.
+		\end{itemize}
+	\item
+		Another way of identifying if the values follow the power law is to create a log-log plot. Plot the values of $\log n$ and $\log T(n)$ on a plot and determine if they approximately make a straight line. If they do, they follow the power law.
+		\begin{tikzpicture}[domain=0:3]
+		\begin{axis}[xlabel={$\log n$}, ylabel={$\log T(n)$}]
+		\addplot[scatter, scatter src=\thisrow{class},
+			  error bars/.cd, y dir=both, x dir=both, y explicit, x explicit, error bar style={color=mapped color}]
+			  table[x=x,y=y] {
+			% The data here is absolutely garbage lol. Not at all from reality.
+			x       y        class
+			0.98521 1        0
+			0.49238 0.5      0
+			1.09346 1.111111 0
+			1.23021 1.25     0
+			1.40567 1.428571 0
+			1.63971 1.666667 0
+			1.96753 2        0
+		};
+		\end{axis}
+		\end{tikzpicture}
+	\item
+		Once it is identified that data follows the power law, a prediction can be made. If the next value of $n$ given has the same ratio to a previous value, you can use the ratio of $T(n)$ to determine the predicted value of $T(n)$ very easily. 
+		\begin{itemize}
+			\item Given $T(8) = 16$ and $T(16) = 48$ and that $T(n)$ follows the power law, you can determine $T(64) = T(16 * 2^2) \approx T(16) * 3^2 = 48 * 9 = 432$ (The 2 and 3 are determined from the ratios, $16/8 = 2$ and $48/16$ = 3.)
+		\end{itemize}
+	\item
+		You could be asked for the value of $b$ in $T(n) = a * n^b$. You can determine this via 
+		\begin{enumerate}
+			\item Determining the slope of the log-log plot. That value is $b$. 
+			\item Take the logarithm of the ratio between rows of $T(n)$ with the base of the ratio of the rows of $n$. $b = \log_{r_n} (r_{T(n)})$.
+			\begin{itemize}
+				\item For the given example of $T(8) = 16$ and $T(16) = 48$, $r_n = 16 / 8 = 2$ and $r_{T(n)} = 48 / 16 = 3$. Therefore, $b = \log_2 3$.
+			\end{itemize}
+		\end{enumerate}
+
 \end{itemize}
 
 \section{Recursive Functions}
@@ -107,48 +149,6 @@
         \end{itemize}
 \end{itemize}
 
-\section{Runtime Analysis based on tabular data}
-\begin{itemize}
-	\item Given a table that contains data for $n$ and the associated $T(n)$'s, we can check if the data  follows the power law.
-	\item The power law is the law that $T(n)$ approximately follows the equation $T(n) = a * b^n$.
-	\item Firstly, you can check if the values follow the power law by identifying the ratios between the rows of $T(n)$ and $n$. If the ratio between the rows of $n$ are consistent, then the ratios between the rows of $T(n)$ should also be consistent (though it can be a different ratio and be okay).
-		\begin{itemize}
-			\item If the ratios between rows of $n$ are not consistent, that doesn't mean it doesn't follow the power law, only that its harder to check. Check the value of $\log_{r_n} (r_{T(n)})$ where $r_n$ is the ratio between two rows of $n$ and $r_{T(n)}$ is the ratio between rows of $T(n)$ (the same rows). For any two rows, this value should be essentially the same for it to follow the power law.
-		\end{itemize}
-	\item
-		Another way of identifying if the values follow the power law is to create a log-log plot. Plot the values of $\log n$ and $\log T(n)$ on a plot and determine if they approximately make a straight line. If they do, they follow the power law.
-		\begin{tikzpicture}[domain=0:3]
-		\begin{axis}[xlabel={$\log n$}, ylabel={$\log T(n)$}]
-		\addplot[scatter, scatter src=\thisrow{class},
-			  error bars/.cd, y dir=both, x dir=both, y explicit, x explicit, error bar style={color=mapped color}]
-			  table[x=x,y=y] {
-			% The data here is absolutely garbage lol. Not at all from reality.
-			x       y        class
-			0.98521 1        0
-			0.49238 0.5      0
-			1.09346 1.111111 0
-			1.23021 1.25     0
-			1.40567 1.428571 0
-			1.63971 1.666667 0
-			1.96753 2        0
-		};
-		\end{axis}
-		\end{tikzpicture}
-	\item
-		Once it is identified that data follows the power law, a prediction can be made. If the next value of $n$ given has the same ratio to a previous value, you can use the ratio of $T(n)$ to determine the predicted value of $T(n)$ very easily. 
-		\begin{itemize}
-			\item Given $T(8) = 16$ and $T(16) = 48$ and that $T(n)$ follows the power law, you can determine $T(64) = T(16 * 2^2) \approx T(16) * 3^2 = 48 * 9 = 432$ (The 2 and 3 are determined from the ratios, $16/8 = 2$ and $48/16$ = 3.)
-		\end{itemize}
-	\item
-		You could be asked for the value of $b$ in $T(n) = a * b^n$. You can determine this via 
-		\begin{enumerate}
-			\item Determining the slope of the log-log plot. That value is $b$. 
-			\item Take the logarithm of the ratio between rows of $T(n)$ with the base of the ratio of the rows of $n$. $b = \log_{r_n} (r_{T(n)})$.
-			\begin{itemize}
-				\item For the given example of $T(8) = 16$ and $T(16) = 48$, $r_n = 16 / 8 = 2$ and $r_{T(n)} = 48 / 16 = 3$. Therefore, $b = \log_2 3$.
-			\end{itemize}
-		\end{enumerate}
-\end{itemize}
 
 \section{Algorithm Analysis}
 \begin{itemize}
