@@ -127,7 +127,24 @@
 
 \section{Queues}
 \begin{itemize}
-    \item 
+    \item Data structure to store and remove data
+    \item First data enqueued would be the first data dequeued (FIFO)
+        \begin{itemize}
+            \item Think of it as a queue of people; first person to enter is also the first person who gets served
+        \end{itemize}
+    \item Standard methods for stacks:
+        \begin{itemize}
+            \item \verb|enqueue()| - Add an element to the end of the queue
+            \item \verb|dequeue()| - Remove the element from the front of the queue
+            \item \verb|isEmpty()| - Whether or not there are elements in the queue
+            \item \verb|size()| - Number of elements in the queue
+            \item \verb|peek()| - View the element at the front of the queue without removing it
+        \end{itemize}
+    \item Implementation using Arrays vs LinkedLists
+        \begin{itemize}
+            \item Arrays: In addition to lower memory overhead, a queue implementation will loop from the end of array to the front, and will keep track of the index of the front and back of the queue (see slides for example).
+            \item LinkedLists: Because LinkedLists are relatively resizable, you don't need to keep track of indices, but you will have to keep track of the front and back of the queue nodes.
+        \end{itemize}
 \end{itemize}
 
 \section{Trees}
