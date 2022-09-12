@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+
+\title{CS251 Midterm 1 - Fall 2022}
+\author{schari}
+\date{September 2022}
+
+\begin{document}
+
+\maketitle
+
+\section{Summations and Logarithm Rules}
+\begin{itemize}
+    \item Summations
+    \begin{itemize}
+        \item Given $c$ is a constant, $\sum_{i = m}^{n} c = c(n - m + 1)$
+        \item $\sum_{i = 1}^{n} i = \frac{1}{2}n(n + 1)$
+        \item $\sum_{i = 1}^{n} i^2 = \frac{1}{6}n(n + 1)(2n + 1)$
+        \item Given a function $f(i)$, $\sum_{i = m}^{n} f(i) = \sum_{i = 1}^{n} f(i) - \sum_{i = 1}^{m - 1} f(i)$
+    \end{itemize}
+    \item Log Rules
+    \begin{itemize}
+        \item In CS 251, if you are just given a $\log(n)$ without a base, they probably mean $\log_2(n)$
+        \item $\log(ab) = \log(a) + \log(b)$
+        \item $\log(\frac{a}{b}) = \log(a) - \log(b)$
+        \item Given 2 numbers $a$ and $b$, $\log_a(n) = \frac{\log_b(n)}{\log_b(a)}$
+        \item $\log(n^a) = a \log(n)$
+        \item $a^{\log_a(n)} = n$
+        \item $a^{c \log_a(n)} = $
+    \end{itemize}
+\end{itemize}
+
+\section{Experimental Analysis}
+
+\begin{itemize}
+    \item Limitations
+        \begin{itemize}
+            \item Different machines can vary the run time % Make these more concrete phrases instead of from the slides
+            \item other processes/noise
+            \item May not be precise all the time 
+        \end{itemize}
+\end{itemize}
+
+\section{Recursive Functions}
+\begin{itemize}
+    \item Functions that call themselves in order to solve simpler problems
+    \item Recursive functions don't call themselves infinitely; eventually stop when they reach a base case
+    \item 
+\end{itemize}
+
+\section{Runtime Analysis}
+
+\section{Arrays and LinkedLists}
+
+\section{Stacks}
+\begin{itemize}
+    \item Data structure to store and remove data
+    \item Last data pushed into the stack would be the first data popped off (LIFO)
+    \begin{itemize}
+        \item Think of it like a stack of plates; the last plate placed on top is the first plate taken from the stack
+    \end{itemize}
+    \item Standard methods for stacks:
+    \begin{itemize}
+        \item \verb|push()| - Add an element to the top of the stack
+        \item \verb|pop()| - Remove the element from the top of the stack
+        \item \verb|isEmpty()| - Whether or not there are elements on the stock
+        \item \verb|size()| - Number of elements on the stack
+        \item \verb|peek()| - View the element at the top of the stack without removing it
+    \end{itemize}
+    \item Implementation using Arrays vs LinkedLists
+    \begin{itemize}
+        \item Arrays: Lower memory overhead; unable to resize to accomodate more elements
+        \item LinkedLists: Pointers require more memory; can expand to increase number of elements in the stack
+    \end{itemize}
+\end{itemize}
+
+\section{Queues}
+\begin{itemize}
+    \item 
+\end{itemize}
+
+\section{Trees}
+
+\end{document}
+
