@@ -13,22 +13,22 @@
 \section{Summations and Logarithm Rules}
 \begin{itemize}
     \item Summations
-    \begin{itemize}
-        \item Given $c$ is a constant, $\sum_{i = m}^{n} c = c(n - m + 1)$
-        \item $\sum_{i = 1}^{n} i = \frac{1}{2}n(n + 1)$
-        \item $\sum_{i = 1}^{n} i^2 = \frac{1}{6}n(n + 1)(2n + 1)$
-        \item Given a function $f(i)$, $\sum_{i = m}^{n} f(i) = \sum_{i = 1}^{n} f(i) - \sum_{i = 1}^{m - 1} f(i)$
-    \end{itemize}
+        \begin{itemize}
+            \item Given $c$ is a constant, $\sum_{i = m}^{n} c = c(n - m + 1)$
+            \item $\sum_{i = 1}^{n} i = \frac{1}{2}n(n + 1)$
+            \item $\sum_{i = 1}^{n} i^2 = \frac{1}{6}n(n + 1)(2n + 1)$
+            \item Given a function $f(i)$, $\sum_{i = m}^{n} f(i) = \sum_{i = 1}^{n} f(i) - \sum_{i = 1}^{m - 1} f(i)$
+        \end{itemize}
     \item Log Rules
-    \begin{itemize}
-        \item In CS 251, if you are just given a $\log(n)$ without a base, they probably mean $\log_2(n)$
-        \item $\log(ab) = \log(a) + \log(b)$
-        \item $\log(\frac{a}{b}) = \log(a) - \log(b)$
-        \item Given 2 numbers $a$ and $b$, $\log_a(n) = \frac{\log_b(n)}{\log_b(a)}$
-        \item $\log(n^a) = a \log(n)$
-        \item $a^{\log_a(n)} = n$
-        \item $a^{c \log_a(n)} = $
-    \end{itemize}
+        \begin{itemize}
+            \item In CS 251, if you are just given a $\log(n)$ without a base, they probably mean $\log_2(n)$
+            \item $\log(ab) = \log(a) + \log(b)$
+            \item $\log(\frac{a}{b}) = \log(a) - \log(b)$
+            \item Given 2 numbers $a$ and $b$, $\log_a(n) = \frac{\log_b(n)}{\log_b(a)}$
+            \item $\log(n^a) = a \log(n)$
+            \item $a^{\log_a(n)} = n$
+            \item $a^{b \log_a(n)} = n^b$
+        \end{itemize}
 \end{itemize}
 
 \section{Experimental Analysis}
@@ -50,6 +50,56 @@
 \end{itemize}
 
 \section{Runtime Analysis}
+\begin{itemize}
+    \item Represents the efficiency of an algorithm
+    \item Three types of asymptotic runtime analysis: $O(n)$, $\Omega(n)$, and $\Theta(n)$
+    \item $O(n)$
+        \begin{itemize}
+            \item The asymptotic upper bound
+            \item Definition: Given functions $f(n)$ and $g(n)$, then $f(n) \in O(g(n))$ if there exists constants $c$ and $n_0$ where $0 \leq f(n) \leq cg(n)$ for all $n \geq n_0$
+            \item In other words, $f(n) \in O(g(n))$ if $f(n)$ doesn't grow faster than $g(n)$.
+            \item Growth order:
+                \begin{itemize}
+                    \item $O(1) < O(\log(n)) < O(n) < O(n \log(n)) < O(n^2) < O(n^3) < O(2^n) < O(n!)$
+                \end{itemize}
+            \item Going from the definition above, multiple functions can be big-$O$ of another function.
+                \begin{itemize}
+                    \item Ex: $n \in O(n)$, and $n \in O(n^2)$
+                \end{itemize}
+            \item Generally, if they're asking for big-$O$ of a function, you want to give the tightest bound of the function.
+            \item When giving the $O(n)$ of a function, you take the fastest-growing term and remove the constants from it
+                \begin{itemize}
+                    \item Ex: $4n^2 + 2n\log(n) + 3n + 123456 \in O(n^2)$
+                \end{itemize}
+        \end{itemize}
+    \item $\Omega(n)$
+        \begin{itemize}
+            \item Asymptotic lower bound
+            \item Definition: Given functions $f(n)$ and $g(n)$, then $f(n) \in \Omega(g(n))$ if there exists constants $c$ and $n_0$ where $0 \leq cg(n) \leq f(n)$ for all $n \geq n_0$
+            \item In other words, $f(n) \in \Omega(g(n))$ if $f(n)$ doesn't grow slower than $g(n)$.
+            \item Like how multiple functions can be $O(n)$ of a function, multiple functions can also be $\Omega(n)$ of a function
+                \begin{itemize}
+                    \item Ex: $n \in \Omega(n)$, and $n \in \Omega(\log(n))$
+                \end{itemize}
+            \item Again, generally you should give the tightest bound
+            \item Process for getting big-$\Omega$ of a function is same as getting big-$O$
+        \end{itemize}
+    \item $\Theta(n)$
+        \begin{itemize}
+            \item Asymptotic tightest bound of a function
+            \item $f(n) \in \Theta(g(n))$ if $f(n)$ doesn't grow faster or slower than $g(n)$
+        \end{itemize}
+    \item Asymptotic Growth Properties
+        \begin{itemize}
+            \item If $f(n) \in O(g(n))$ and $f(n) \in \Omega(g(n))$, then $f(n) \in \Omega(g(n))$ and vice versa
+            \item If $f(n) \in O(g(n))$ and $g(n) \in O(h(n))$, then $f(n) \in O(h(n))$
+            \item If $f(n) \in \Omega(g(n))$ and $g(n) \in \Omega(h(n))$, then $f(n) \in \Omega(h(n))$
+            \item If $f(n) \in \Theta(g(n))$ and $g(n) \in \Theta(h(n))$, then $f(n) \in \Theta(h(n))$
+            \item If $f(n) \in O(h(n))$ and $g(n) \in O(h(n))$, then $f(n) + g(n) \in O(h(n))$
+            \item If $f(n) \in \Theta(g(n))$, then $f(n) + g(n) \in \Theta(g(n))$
+            \item If $f(n) \in O(g(n))$, then $g(n) \in \Omega(f(n))$
+        \end{itemize}
+\end{itemize}
 
 \section{Arrays and LinkedLists}
 
@@ -57,22 +107,22 @@
 \begin{itemize}
     \item Data structure to store and remove data
     \item Last data pushed into the stack would be the first data popped off (LIFO)
-    \begin{itemize}
-        \item Think of it like a stack of plates; the last plate placed on top is the first plate taken from the stack
-    \end{itemize}
+        \begin{itemize}
+            \item Think of it like a stack of plates; the last plate placed on top is the first plate taken from the stack
+        \end{itemize}
     \item Standard methods for stacks:
-    \begin{itemize}
-        \item \verb|push()| - Add an element to the top of the stack
-        \item \verb|pop()| - Remove the element from the top of the stack
-        \item \verb|isEmpty()| - Whether or not there are elements on the stock
-        \item \verb|size()| - Number of elements on the stack
-        \item \verb|peek()| - View the element at the top of the stack without removing it
-    \end{itemize}
+        \begin{itemize}
+            \item \verb|push()| - Add an element to the top of the stack
+            \item \verb|pop()| - Remove the element from the top of the stack
+            \item \verb|isEmpty()| - Whether or not there are elements on the stock
+            \item \verb|size()| - Number of elements on the stack
+            \item \verb|peek()| - View the element at the top of the stack without removing it
+        \end{itemize}
     \item Implementation using Arrays vs LinkedLists
-    \begin{itemize}
-        \item Arrays: Lower memory overhead; unable to resize to accomodate more elements
-        \item LinkedLists: Pointers require more memory; can expand to increase number of elements in the stack
-    \end{itemize}
+        \begin{itemize}
+            \item Arrays: Lower memory overhead; unable to resize to accomodate more elements
+            \item LinkedLists: Pointers require more memory; can expand to increase number of elements in the stack
+        \end{itemize}
 \end{itemize}
 
 \section{Queues}
