@@ -44,9 +44,9 @@
             \item May not be precise all the time 
         \end{itemize}
     \item These limitations are all put together to form constants $c$, which are seen in just about any runtime cost. In the power law, they are lumped together into a proportionality constant $a$.
-    \item The power law is the law that $T(n)$ approximately follows the equation $T(n) = a * n^b$. The coefficient $a$ will be based on the hardware, which you cannot control. However, the value of $b$
+    \item The power law is the law that $T(n)$ approximately follows the equation $T(n) = a * n^b$. The coefficient $a$ will be based on the hardware, which you cannot control. However, the value of $b$ is dependent on the algorithm.
 	\item Given a table that contains data for $n$ and the associated $T(n)$'s, we can check if the data  follows the power law.
-	\item Firstly, you can check if the values follow the power law by identifying the ratios between the rows of $T(n)$ and $n$. If the ratio between the rows of $n$ are consistent, then the ratios between the rows of $T(n)$ should also be consistent (though it can be a different ratio and be okay).
+	\item Firstly, you can check if the values follow the power law by identifying the ratios between the rows of $T(n)$ and $n$. If the ratio between the rows of $n$ are consistent, then the ratios between the rows of $T(n)$ should also be consistent (though it can be a different ratio between $n$ and $T(n)$ and be okay. They just have to be consistent with their own rows).
 		\begin{itemize}
 			\item If the ratios between rows of $n$ are not consistent, that doesn't mean it doesn't follow the power law, only that its harder to check. Check the value of $\log_{r_n} (r_{T(n)})$ where $r_n$ is the ratio between two rows of $n$ and $r_{T(n)}$ is the ratio between rows of $T(n)$ (the same rows). For any two rows, this value should be essentially the same for it to follow the power law.
 		\end{itemize}
