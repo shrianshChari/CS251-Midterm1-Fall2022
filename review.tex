@@ -249,6 +249,39 @@
                 \end{itemize}
         \end{itemize}
     \item LinkedLists
+        \begin{itemize}
+            \item A dynamic linear data structure
+            \item There are a few kinds of linked lists
+                \begin{itemize}
+                    \item Singly linked lists: each node in the list points to the next element in the list
+                    \item Doubly linked list: each node in the list points to the next and previous element in the list
+                    \item Circularly linked list: the last element in the list points to the first (and in a doubly circular linked list, the first element will point to the last element)
+                \end{itemize}
+            \item Accessing data in an array $\in O(n)$
+                \begin{itemize}
+                    \item This is because you will have to traverse through the list to get to the item you are accessing
+                \end{itemize}
+            \item Inserting an element into the list
+                \begin{itemize}
+                    \item Inserting at the front of the list $\in O(1)$
+                    \item Inserting at the back of the list:
+                        \begin{itemize}
+                            \item If you have a pointer to the end of the list: $\in O(1)$
+                            \item If not, $\in O(n)$
+                        \end{itemize}
+                    \item Inserting in the middle of the list: $\in O(n)$
+                \end{itemize}
+            \item Deleting an element from the list
+                \begin{itemize}
+                    \item Singly linked list $\in O(n)$ since you have to always loop from the front
+                    \item Doubly linked list $\in O(1)$ since you can also loop from the rear and save time then
+                \end{itemize}
+        \end{itemize}
+    \item \underline{Pros} vs \textit{Cons} of Arrays and LinkedLists
+    \begin{itemize}
+        \item Arrays: \underline{direct access to any element in the array}, \underline{no pointers}, \textit{is fixed in size}, \textit{requires consecutive space in memory to initialize}
+        \item LinkedLists: \underline{Resizeable}, \underline{easy insertion at the front or back of the list}, \textit{space overhead because of pointers}, \textit{cannot easily access an element in the middle of the list}
+    \end{itemize}
 \end{itemize}
 
 \section{Stacks}
