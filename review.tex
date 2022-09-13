@@ -3,6 +3,7 @@
 \usepackage{amssymb}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage[letterpaper, margin=1.25in]{geometry}
 
 \title{CS251 Midterm 1 - Fall 2022}
 \author{schari}
@@ -52,23 +53,27 @@
         \end{itemize}
     \item
         Another way of identifying if the values follow the power law is to create a log-log plot. Plot the values of $\log n$ and $\log T(n)$ on a plot and determine if they approximately make a straight line. If they do, they follow the power law.
-        \begin{tikzpicture}[domain=0:3]
-            \begin{axis}[xlabel={$\log n$}, ylabel={$\log T(n)$}]
-                \addplot[scatter, scatter src=\thisrow{class},
-                error bars/.cd, y dir=both, x dir=both, y explicit, x explicit, error bar style={color=mapped color}]
-                table[x=x,y=y] {
-                    % The data here is absolutely garbage lol. Not at all from reality.
-                    x       y        class
-                    0.98521 1        0
-                    0.49238 0.5      0
-                    1.09346 1.111111 0
-                    1.23021 1.25     0
-                    1.40567 1.428571 0
-                    1.63971 1.666667 0
-                    1.96753 2        0
-                };
-            \end{axis}
-        \end{tikzpicture}
+
+        \begin{center}
+            \begin{tikzpicture}[domain=0:3]
+                \begin{axis}[xlabel={$\log n$}, ylabel={$\log T(n)$}]
+                    \addplot[scatter, scatter src=\thisrow{class},
+                    error bars/.cd, y dir=both, x dir=both, y explicit, x explicit, error bar style={color=mapped color}]
+                    table[x=x,y=y] {
+                        % The data here is absolutely garbage lol. Not at all from reality.
+                        x       y        class
+                        0.98521 1        0
+                        0.49238 0.5      0
+                        1.09346 1.111111 0
+                        1.23021 1.25     0
+                        1.40567 1.428571 0
+                        1.63971 1.666667 0
+                        1.96753 2        0
+                    };
+                \end{axis}
+            \end{tikzpicture}
+        \end{center}
+
     \item
         Once it is identified that data follows the power law, a prediction can be made. If the next value of $n$ given has the same ratio to a previous value, you can use the ratio of $T(n)$ to determine the predicted value of $T(n)$ very easily. 
         \begin{itemize}
@@ -278,10 +283,10 @@
                 \end{itemize}
         \end{itemize}
     \item \underline{Pros} vs \textit{Cons} of Arrays and LinkedLists
-    \begin{itemize}
-        \item Arrays: \underline{direct access to any element in the array}, \underline{no pointers}, \textit{is fixed in size}, \textit{requires consecutive space in memory to initialize}
-        \item LinkedLists: \underline{Resizeable}, \underline{easy insertion at the front or back of the list}, \textit{space overhead because of pointers}, \textit{cannot easily access an element in the middle of the list}
-    \end{itemize}
+        \begin{itemize}
+            \item Arrays: \underline{direct access to any element in the array}, \underline{no pointers}, \textit{is fixed in size}, \textit{requires consecutive space in memory to initialize}
+            \item LinkedLists: \underline{Resizeable}, \underline{easy insertion at the front or back of the list}, \textit{space overhead because of pointers}, \textit{cannot easily access an element in the middle of the list}
+        \end{itemize}
 \end{itemize}
 
 \section{Stacks}
@@ -329,6 +334,118 @@
 \end{itemize}
 
 \section{Trees}
+\begin{itemize}
+    \item Non-linear, top-down structures
+    \item Composed of a series of nodes that point to children (the node that points to children is called a parent)
+    \item Trees can have 0 to many children
+    \item Concepts:
+        \begin{itemize}
+            \item Size: number of nodes in Trees
+            \item A tree is empty when it has 0 nodes in it
+            \item Root: Node that has no parent nodes
+            \item Parent: Node that points to this node
+            \item Grandparent: Node that points to parent node
+            \item Sibling: nodes besides current node that parent node points to
+            \item Children: Nodes that current node points to
+            \item Leaf: Node that has no children
+            \item Height: distance between lowest node and root node (root is height 0)
+            \item Depth: same as height
+        \end{itemize}
+    \item Binary Trees
+        \begin{itemize}
+            \item Special kind of tree where each node has either 0, 1, or 2 children
+            \item Designate these children as left or right
+            \item Full binary tree: Every node has 2 children except for the leaves
+            \item Complete binary tree: Except for leaves, the rest of the tree is a full binary tree. The leaves are inserted from left to right at the bottom.
+            \item Properties of binary trees
+                \begin{itemize}
+                    \item Given a binary tree of height $h$, the maximum number of leaves it can have is $2^h$, and the maximum total number of nodes it can have is $2^{h + 1} - 1$
+                \end{itemize}
+            \item Traversing Binary Trees
+                \begin{itemize}
+                    \item We will use this tree as an example:
+
+                        \begin{tikzpicture}
+                            \node {A}
+                            child{node [xshift = -0.5 cm]{B}
+                            child{node {D}}
+                            child{node {E}}}
+                            child{node [xshift = 0.5 cm]{C}
+                            child{node {F}}
+                            child{node {G}}};
+                        \end{tikzpicture}
+                    \item Preorder
+                        \begin{itemize}
+                            \item Visit a node before its descendants (NLR)
+                            \item Traversal thru current tree: A, B, D, E, C, F, G
+                        \end{itemize}
+                    \item Inorder
+                        \begin{itemize}
+                            \item Visit a node before its right descendant but after its left descendant (LNR)
+                            \item Traversal thru current tree: D, B, E, A, F, C, G
+                        \end{itemize}
+                    \item Postorder
+                        \begin{itemize}
+                            \item Visit a node after its descendants (LRN)
+                            \item Traversal thru current tree: D, E, B, F, C, G, A
+                        \end{itemize}
+                    \item Levels
+                        \begin{itemize}
+                            \item Traverse the tree one level at a time from left to right
+                            \item Traversal thru current tree: A, B, C, D, E, F, G
+                        \end{itemize}
+                \end{itemize}
+            \item Expression Trees
+                \begin{itemize}
+                    \item Can build binary trees out of arithmetic expressions by creating splits at significant operators
+                    \item Example: Turning $x^2 + c = bx$ into an expression tree
+                        \begin{enumerate}
+                            \item Split at =
+
+                                \begin{tikzpicture}
+                                    \node {=}
+                                    child{node {$x^2 + c$}}
+                                    child{node {$bx$}};
+                                \end{tikzpicture}
+                            \item Split at +
+
+                                \begin{tikzpicture}
+                                    \node {=}
+                                    child{node {+}
+                                    child{node {$x^2$}}
+                                    child{node {$c$}}}
+                                    child{node {$bx$}};
+                                \end{tikzpicture}
+                            \item Split at $\times$
+
+                                \begin{tikzpicture}
+                                    \node {=}
+                                    child{node [xshift = -0.5cm]{+}
+                                    child{node {$x^2$}}
+                                    child{node {$c$}}}
+                                    child{node [xshift = 0.5cm]{$\times$}
+                                    child{node {$b$}}
+                                    child{node {$x$}}};
+                                \end{tikzpicture}
+                            \item Split at $\wedge$
+
+                                \begin{tikzpicture}
+                                    \node {=}
+                                    child{node [xshift = -0.5cm]{+}
+                                    child{node {$\wedge$}
+                                    child{node {$x$}}
+                                    child{node {$2$}}}
+                                    child{node {$c$}}}
+                                    child{node [xshift = 0.5cm]{$\times$}
+                                    child{node {$b$}}
+                                    child{node {$x$}}};
+                                \end{tikzpicture}
+                        \end{enumerate}
+                    \item Order at which you split: $=, (), +-, \times/, \wedge$
+                    \item You can also traverse these trees in the same way as other binary trees (preorder, inorder, postorder, levels).
+                \end{itemize}
+        \end{itemize}
+    \end{itemize}
 
 \end{document}
 
