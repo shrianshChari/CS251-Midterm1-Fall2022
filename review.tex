@@ -38,51 +38,51 @@
 \begin{itemize}
     \item Limitations
         \begin{itemize}
-        	% Make these more concrete phrases instead of from the slides
+                % Make these more concrete phrases instead of from the slides
             \item Different machines can vary the run time 
             \item other processes/noise
             \item May not be precise all the time 
         \end{itemize}
     \item These limitations are all put together to form constants $c$, which are seen in just about any runtime cost. In the power law, they are lumped together into a proportionality constant $a$.
     \item The power law is the law that $T(n)$ approximately follows the equation $T(n) = a * n^b$. The coefficient $a$ will be based on the hardware, which you cannot control. However, the value of $b$ is dependent on the algorithm.
-	\item Given a table that contains data for $n$ and the associated $T(n)$'s, we can check if the data  follows the power law.
-	\item Firstly, you can check if the values follow the power law by identifying the ratios between the rows of $T(n)$ and $n$. If the ratio between the rows of $n$ are consistent, then the ratios between the rows of $T(n)$ should also be consistent (though it can be a different ratio between $n$ and $T(n)$ and be okay. They just have to be consistent with their own rows).
-		\begin{itemize}
-			\item If the ratios between rows of $n$ are not consistent, that doesn't mean it doesn't follow the power law, only that its harder to check. Check the value of $\log_{r_n} (r_{T(n)})$ where $r_n$ is the ratio between two rows of $n$ and $r_{T(n)}$ is the ratio between rows of $T(n)$ (the same rows). For any two rows, this value should be essentially the same for it to follow the power law.
-		\end{itemize}
-	\item
-		Another way of identifying if the values follow the power law is to create a log-log plot. Plot the values of $\log n$ and $\log T(n)$ on a plot and determine if they approximately make a straight line. If they do, they follow the power law.
-		\begin{tikzpicture}[domain=0:3]
-		\begin{axis}[xlabel={$\log n$}, ylabel={$\log T(n)$}]
-		\addplot[scatter, scatter src=\thisrow{class},
-			  error bars/.cd, y dir=both, x dir=both, y explicit, x explicit, error bar style={color=mapped color}]
-			  table[x=x,y=y] {
-			% The data here is absolutely garbage lol. Not at all from reality.
-			x       y        class
-			0.98521 1        0
-			0.49238 0.5      0
-			1.09346 1.111111 0
-			1.23021 1.25     0
-			1.40567 1.428571 0
-			1.63971 1.666667 0
-			1.96753 2        0
-		};
-		\end{axis}
-		\end{tikzpicture}
-	\item
-		Once it is identified that data follows the power law, a prediction can be made. If the next value of $n$ given has the same ratio to a previous value, you can use the ratio of $T(n)$ to determine the predicted value of $T(n)$ very easily. 
-		\begin{itemize}
-			\item Given $T(8) = 16$ and $T(16) = 48$ and that $T(n)$ follows the power law, you can determine $T(64) = T(16 * 2^2) \approx T(16) * 3^2 = 48 * 9 = 432$ (The 2 and 3 are determined from the ratios, $16/8 = 2$ and $48/16$ = 3.)
-		\end{itemize}
-	\item
-		You could be asked for the value of $b$ in $T(n) = a * n^b$. You can determine this via 
-		\begin{enumerate}
-			\item Determining the slope of the log-log plot. That value is $b$. 
-			\item Take the logarithm of the ratio between rows of $T(n)$ with the base of the ratio of the rows of $n$. $b = \log_{r_n} (r_{T(n)})$.
-			\begin{itemize}
-				\item For the given example of $T(8) = 16$ and $T(16) = 48$, $r_n = 16 / 8 = 2$ and $r_{T(n)} = 48 / 16 = 3$. Therefore, $b = \log_2 3$.
-			\end{itemize}
-		\end{enumerate}
+    \item Given a table that contains data for $n$ and the associated $T(n)$'s, we can check if the data  follows the power law.
+    \item Firstly, you can check if the values follow the power law by identifying the ratios between the rows of $T(n)$ and $n$. If the ratio between the rows of $n$ are consistent, then the ratios between the rows of $T(n)$ should also be consistent (though it can be a different ratio between $n$ and $T(n)$ and be okay. They just have to be consistent with their own rows).
+        \begin{itemize}
+            \item If the ratios between rows of $n$ are not consistent, that doesn't mean it doesn't follow the power law, only that its harder to check. Check the value of $\log_{r_n} (r_{T(n)})$ where $r_n$ is the ratio between two rows of $n$ and $r_{T(n)}$ is the ratio between rows of $T(n)$ (the same rows). For any two rows, this value should be essentially the same for it to follow the power law.
+        \end{itemize}
+    \item
+        Another way of identifying if the values follow the power law is to create a log-log plot. Plot the values of $\log n$ and $\log T(n)$ on a plot and determine if they approximately make a straight line. If they do, they follow the power law.
+        \begin{tikzpicture}[domain=0:3]
+            \begin{axis}[xlabel={$\log n$}, ylabel={$\log T(n)$}]
+                \addplot[scatter, scatter src=\thisrow{class},
+                error bars/.cd, y dir=both, x dir=both, y explicit, x explicit, error bar style={color=mapped color}]
+                table[x=x,y=y] {
+                    % The data here is absolutely garbage lol. Not at all from reality.
+                    x       y        class
+                    0.98521 1        0
+                    0.49238 0.5      0
+                    1.09346 1.111111 0
+                    1.23021 1.25     0
+                    1.40567 1.428571 0
+                    1.63971 1.666667 0
+                    1.96753 2        0
+                };
+            \end{axis}
+        \end{tikzpicture}
+    \item
+        Once it is identified that data follows the power law, a prediction can be made. If the next value of $n$ given has the same ratio to a previous value, you can use the ratio of $T(n)$ to determine the predicted value of $T(n)$ very easily. 
+        \begin{itemize}
+            \item Given $T(8) = 16$ and $T(16) = 48$ and that $T(n)$ follows the power law, you can determine $T(64) = T(16 * 2^2) \approx T(16) * 3^2 = 48 * 9 = 432$ (The 2 and 3 are determined from the ratios, $16/8 = 2$ and $48/16$ = 3.)
+        \end{itemize}
+    \item
+        You could be asked for the value of $b$ in $T(n) = a * n^b$. You can determine this via 
+        \begin{enumerate}
+            \item Determining the slope of the log-log plot. That value is $b$. 
+            \item Take the logarithm of the ratio between rows of $T(n)$ with the base of the ratio of the rows of $n$. $b = \log_{r_n} (r_{T(n)})$.
+                \begin{itemize}
+                    \item For the given example of $T(8) = 16$ and $T(16) = 48$, $r_n = 16 / 8 = 2$ and $r_{T(n)} = 48 / 16 = 3$. Therefore, $b = \log_2 3$.
+                \end{itemize}
+        \end{enumerate}
 
 \end{itemize}
 
@@ -96,10 +96,10 @@
 \section{Runtime Analysis}
 \begin{itemize}
     \item Represents the efficiency of an algorithm
-    	\begin{itemize}
-    		\item Usually represents the cost of an algorithm for a specific value of n. 
-    		\item However, can be amortized if the cost is distributed over an interval of values of n. (Equation is $\sum_{k=a}^{b} T(k) / (b-a+1)$)
-    	\end{itemize}
+        \begin{itemize}
+            \item Usually represents the cost of an algorithm for a specific value of n. 
+            \item However, can be amortized if the cost is distributed over an interval of values of n. (Equation is $\sum_{k=a}^{b} T(k) / (b-a+1)$)
+        \end{itemize}
     \item Three types of asymptotic runtime analysis: $O(n)$, $\Omega(n)$, and $\Theta(n)$
     \item $O(n)$
         \begin{itemize}
@@ -154,7 +154,7 @@
 \begin{itemize}
     \item Given an algorithm, we need to find the runtime cost of it.
     \item The runtime cost is based on what is specifically deemed worthy of noting. This can be the following:
-	    \begin{itemize}
+        \begin{itemize}
             \item The number of iterations.
                 \begin{itemize}
                     \item for$(i = 0; i < n; i++) // $Do something
@@ -162,9 +162,9 @@
             \item The value of a variable
                 \begin{itemize}
                     \item 
-                    $total = 0;$
-                    
-                    for$(i = 0; i < n; i++)$ $total += i$
+                        $total = 0;$
+
+                        for$(i = 0; i < n; i++)$ $total += i$
                 \end{itemize}
             \item The number of times a function is ran.
                 \begin{itemize}
@@ -174,48 +174,82 @@
                 \begin{itemize}
                     \item for$(i = 0; i < n; i++) f(i)$ where $f(i)$ has a defined cost (e.g. $f(i) = i$ or $f(i) = \log i$).
                 \end{itemize}
-		\end{itemize}
-	\item Some rules that you can follow are the following:
-    	\begin{itemize}
-    		\item
-				Loops and recursion generally turn into sigma notation.
-			\item
-				If there is an "if" statement or other condition, it is usually better to seperate it into seperate parts or entire equations, instead of trying to keep it in the same parts. This includes things like the base case of a recursive function, if the base case counts as an iteration!
-			\item
-				If the loop is going backwards, you can turn it around if it makes it easier. (e.g. you can turn subtraction into addition and swap upper and lower bounds, or division to multiplication), Just be careful its still the same iteration values!
-			\item
-				If the comparison "$< f(n)$" is used, you probably want to use "ceil(f(n)) - 1" ($\lceil f(n) \rceil - 1$) as the upper bound. If its "$<= f(n)$", you probably want "floor(f(n))" ($\lfloor f(n) \rfloor$)
-			\item
-				However, if looking at an asymptotic cost ($O(n)$, $\Omega(n)$, $\Theta(n)$), then you probably don't need floor and ceil at all, because they are miniscule compared to the entire sum.
-    	\end{itemize}
+        \end{itemize}
+    \item Some rules that you can follow are the following:
+        \begin{itemize}
+            \item
+                Loops and recursion generally turn into sigma notation.
+            \item
+                If there is an "if" statement or other condition, it is usually better to seperate it into seperate parts or entire equations, instead of trying to keep it in the same parts. This includes things like the base case of a recursive function, if the base case counts as an iteration!
+            \item
+                If the loop is going backwards, you can turn it around if it makes it easier. (e.g. you can turn subtraction into addition and swap upper and lower bounds, or division to multiplication), Just be careful its still the same iteration values!
+            \item
+                If the comparison "$< f(n)$" is used, you probably want to use "ceil(f(n)) - 1" ($\lceil f(n) \rceil - 1$) as the upper bound. If its "$<= f(n)$", you probably want "floor(f(n))" ($\lfloor f(n) \rfloor$)
+            \item
+                However, if looking at an asymptotic cost ($O(n)$, $\Omega(n)$, $\Theta(n)$), then you probably don't need floor and ceil at all, because they are miniscule compared to the entire sum.
+        \end{itemize}
     \item There are a number of ways of taking an algorithm and determining the cost.
-    	\begin{itemize}
-    		\item
-    			Given a loop where a variable is incremented by 1 between each iteration, a simple sigma notation can be used.
-    			
-    			for$(i = 0; i < n; i++) f(i) \Rightarrow$
-    			$\sum_{i=0}^{n-1} T_f(i)$
-    		\item
-    			Given a loop where a variable is multiplied by c between each iteration, you can use log, and then replace any value of $i$ with $2^k$.
-    			
-    			for$(i = 1; i < n; i *= c) f(i) \Rightarrow$
-    			$\sum_{k=0}^{\lceil \log_c n \rceil - 1} T_f(2^k)$
-    		\item
-    			Given a recursive function that takes an input $n$, with base case $a$, and does a $f(n)$ cost operation, and then runs itself with value $n-1$, the summation would be:
-    			$\sum_{k=a}^{n} f(k)$
-    			
-    			Notice that this is exactly the same as a loop. For basic recursive functions, they are basically just loops. Anything else you might want induction.
-    		\item
-    			This is something we haven't covered, but it is useful in some circumstances.
-    			Given a loop where a variable is incremented by k between each iteration, you can stretch or squish the sigma accordingly.
-    			
-    			for$(i = a; i < n; i += k) f(i) \Rightarrow$
-    			$\sum_{i=0}^{\lceil(n-a)/k \rceil - 1} T_f(ki + a)$
-    	\end{itemize}
+        \begin{itemize}
+            \item
+                Given a loop where a variable is incremented by 1 between each iteration, a simple sigma notation can be used.
+
+                for$(i = 0; i < n; i++) f(i) \Rightarrow$
+                $\sum_{i=0}^{n-1} T_f(i)$
+            \item
+                Given a loop where a variable is multiplied by c between each iteration, you can use log, and then replace any value of $i$ with $2^k$.
+
+                for$(i = 1; i < n; i *= c) f(i) \Rightarrow$
+                $\sum_{k=0}^{\lceil \log_c n \rceil - 1} T_f(2^k)$
+            \item
+                Given a recursive function that takes an input $n$, with base case $a$, and does a $f(n)$ cost operation, and then runs itself with value $n-1$, the summation would be:
+                $\sum_{k=a}^{n} f(k)$
+
+                Notice that this is exactly the same as a loop. For basic recursive functions, they are basically just loops. Anything else you might want induction.
+            \item
+                This is something we haven't covered, but it is useful in some circumstances.
+                Given a loop where a variable is incremented by k between each iteration, you can stretch or squish the sigma accordingly.
+
+                for$(i = a; i < n; i += k) f(i) \Rightarrow$
+                $\sum_{i=0}^{\lceil(n-a)/k \rceil - 1} T_f(ki + a)$
+        \end{itemize}
 \end{itemize}
 
 
 \section{Arrays and LinkedLists}
+\begin{itemize}
+    \item Arrays
+        \begin{itemize}
+            \item A fixed size sequential data structure
+            \item Accessing data in an array $\in O(1)$
+            \item Inserting an element at the end of the array
+                \begin{itemize}
+                    \item If you keep track of the next available cell, $O(1)$
+                    \item If not, $O(n)$
+                \end{itemize}
+            \item Inserting an element in the middle of a sorted array
+                \begin{itemize}
+                    \item Determining the position to insert the element + shifting elements to the right: $O(n)$
+                \end{itemize}
+            \item Resizing an array
+                \begin{itemize}
+                    \item Increasing the size of an array involves creating a new array with a larger size, then transferring the elements from the array to the new array
+                    \item This process is $T(n) \approx n \in O(n)$
+                    \item In order to minimize the amount of times we have to repeat the process of expanding the array, we generally double the size of the old array
+                    \item Because this resizing is done so infrequently, we \textit{amortize} this operation; that is, average it over several elements. Essentially, because we don't resize this array when inserting the first $n$ elements, when the $n + 1^{\mathrm{th}}$ element is inserted, despite resizing the array being relatively costly, we do it infrequently enough so that the average runtime cost is not as extreme.
+                    \item Example proof: Let $T(k)$ be the runtime cost associated with resizing the array when inserting $k$ elements into an array of size $n$. This means that the amortized cost $T(n) = \sum_{k = 1}^{n + 1} \frac{1}{n + 1}T(k)$. \\
+
+                        When $k \leq n$, we do not resize the array, since the array still has capacity to accept new elements. Therefore, when $k \leq n$, $T(k) = 0$ since nothing is done to expand the array. Meanwhile, when $k = n + 1$, because we are resizing the array, we incur the full cost from resizing the array. Therefore, $T(n + 1) = n$. \\
+
+                        Therefore,
+                        $$\sum_{k = 1}^{n + 1} \frac{1}{n + 1}T(k) = \frac{1}{n + 1}(0 + 0 + \ldots + 0 + n) =$$
+                        $$ \frac{n}{n + 1} = 1 - \frac{1}{n + 1} \in O(1)$$
+
+                        Therefore, the amortized runtime of $T(n) \in O(1)$.
+                    \item Here, I'm justifying why $T(k)$ evaluates the way it does at various values, then I'm taking the average of $T(k)$ at the various values I've specified.
+                \end{itemize}
+        \end{itemize}
+    \item LinkedLists
+\end{itemize}
 
 \section{Stacks}
 \begin{itemize}
