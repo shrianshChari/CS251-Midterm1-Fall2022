@@ -348,14 +348,15 @@
             \item Sibling: nodes besides current node that parent node points to
             \item Children: Nodes that current node points to
             \item Leaf: Node that has no children
-            \item Height: distance between lowest node and root node (root is height 0)
-            \item Depth: same as height
+            \item Tree height: distance between lowest node and root node
+            \item Height: distance between lowest node and current node (leaves are height 0)
+            \item Depth: distance between current node and root node (root is depth 0)
         \end{itemize}
     \item Binary Trees
         \begin{itemize}
             \item Special kind of tree where each node has either 0, 1, or 2 children
             \item Designate these children as left or right
-            \item Full binary tree: Every node has 2 children except for the leaves
+            \item Full binary tree: Every node has 2 children except for the leaves (aka every node has 0 or 2 nodes)
             \item Complete binary tree: Except for leaves, the rest of the tree is a full binary tree. The leaves are inserted from left to right at the bottom.
             \item Properties of binary trees
                 \begin{itemize}
